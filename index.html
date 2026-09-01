@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Mãe dos Talentos — Acompanhamento e Suporte para Jovens Atletas</title>
+<meta name="description" content="Acompanhamento, organização e suporte para adolescentes na rotina do futebol, com comunicação próxima e transparente com pais e responsáveis.">
+<meta name="keywords" content="acompanhamento adolescentes, futebol jovem, suporte atletas, rotina esportiva">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Casa Mãe dos Talentos — Acompanhamento e Suporte para Jovens Atletas">
+<meta property="og:description" content="Organização, disciplina e acompanhamento próximo para adolescentes envolvidos com futebol.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============ RESET & BASE ============ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+ul { list-style: none; }
+h1, h2, h3, h4 { font-family: 'Archivo', sans-serif; line-height: 1.12; letter-spacing: -0.01em; }
+
+/* ============ TOKENS ============ */
+:root {
+  --pitch: #16342A;
+  --pitch-dark: #0E241C;
+  --navy: #101820;
+  --paper: #F6F4EE;
+  --paper-soft: #EFEBE0;
+  --amber: #C89B3C;
+  --amber-soft: #E4C878;
+  --sage: #8FA396;
+  --ink: #16211C;
+  --ink-soft: #4B564F;
+  --white: #FFFFFF;
+  --radius: 14px;
+  --shadow: 0 12px 32px -16px rgba(16, 24, 32, 0.25);
+  --container: 1160px;
+  --section-pad: 108px;
+}
+@media (max-width: 768px) { :root { --section-pad: 68px; } }
+
+.wrap { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+.eyebrow-off { } /* intentionally no tracked-out eyebrow labels used, per design direction */
+
+section { padding: var(--section-pad) 0; }
+.section-head { max-width: 620px; margin-bottom: 56px; }
+.section-head h2 { font-size: clamp(1.9rem, 3.4vw, 2.6rem); font-weight: 800; color: var(--pitch-dark); }
+.section-head p { margin-top: 14px; font-size: 1.05rem; color: var(--ink-soft); max-width: 60ch; }
+.section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 15px 30px; border-radius: 999px; font-weight: 700; font-size: 0.98rem;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--pitch); color: var(--white); box-shadow: 0 10px 24px -10px rgba(22,52,42,0.55); }
+.btn-primary:hover { background: var(--pitch-dark); box-shadow: 0 14px 28px -10px rgba(22,52,42,0.6); }
+.btn-whatsapp { background: #1E7A46; color: var(--white); box-shadow: 0 10px 24px -10px rgba(30,122,70,0.5); }
+.btn-whatsapp:hover { background: #176238; }
+.btn-outline { background: transparent; color: var(--pitch-dark); border: 1.5px solid var(--pitch-dark); }
+.btn-outline:hover { background: var(--pitch-dark); color: var(--white); }
+.btn-ghost-light { background: rgba(255,255,255,0.12); color: var(--white); border: 1.5px solid rgba(255,255,255,0.4); }
+.btn-ghost-light:hover { background: rgba(255,255,255,0.22); }
+.btn svg { width: 19px; height: 19px; flex-shrink: 0; }
+
+/* ============ NAV ============ */
+header.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  background: rgba(246, 244, 238, 0.0);
+  transition: background .25s ease, box-shadow .25s ease, padding .25s ease;
+  padding: 22px 0;
+}
+header.site-nav.scrolled {
+  background: rgba(246, 244, 238, 0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 18px -8px rgba(16,24,32,0.15);
+  padding: 14px 0;
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--pitch-dark); }
+.brand .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--amber); }
+.nav-links { display: flex; align-items: center; gap: 30px; }
+.nav-links a { font-size: 0.95rem; font-weight: 600; color: var(--ink); transition: color .15s ease; position: relative; }
+.nav-links a:hover { color: var(--pitch); }
+.nav-cta { display: flex; align-items: center; gap: 14px; }
+.hamburger { display: none; flex-direction: column; gap: 5px; width: 26px; z-index: 600; }
+.hamburger span { display: block; height: 2.5px; width: 100%; background: var(--pitch-dark); border-radius: 2px; transition: transform .25s ease, opacity .25s ease; }
+.hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed; inset: 0; background: var(--pitch-dark); z-index: 400;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+  transform: translateY(-100%); transition: transform .35s ease;
+}
+.mobile-menu.open { transform: translateY(0); }
+.mobile-menu a { color: var(--paper); font-family: 'Archivo', sans-serif; font-size: 1.5rem; font-weight: 700; }
+.mobile-menu .btn { margin-top: 10px; }
+
+@media (max-width: 900px) {
+  .nav-links, .nav-cta .btn-outline-hide { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* ============ HERO ============ */
+.hero {
+  position: relative;
+  padding-top: 168px;
+  padding-bottom: 96px;
+  background: linear-gradient(180deg, #FBFAF6 0%, var(--paper) 55%, var(--paper) 100%);
+  overflow: hidden;
+}
+.hero-inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
+.hero-copy h1 { font-size: clamp(2.2rem, 4.6vw, 3.4rem); font-weight: 900; color: var(--pitch-dark); }
+.hero-copy p.lead { margin-top: 22px; font-size: 1.1rem; color: var(--ink-soft); max-width: 46ch; }
+.hero-actions { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-trust { margin-top: 40px; display: flex; gap: 28px; flex-wrap: wrap; }
+.hero-trust div { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 600; color: var(--ink-soft); }
+.hero-trust svg { width: 20px; height: 20px; color: var(--pitch); flex-shrink: 0; }
+
+.hero-art { position: relative; }
+.hero-art svg { width: 100%; height: auto; }
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-art { order: -1; max-width: 340px; margin: 0 auto 12px; }
+  .hero { padding-top: 130px; }
+}
+
+/* ============ PARA QUEM É ============ */
+.audience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.audience-card {
+  background: var(--white); border-radius: var(--radius); padding: 30px 26px;
+  box-shadow: var(--shadow); border: 1px solid rgba(22,52,42,0.06);
+  transition: transform .25s ease, box-shadow .25s ease;
+  opacity: 0; transform: translateY(22px);
+}
+.audience-card.in-view { opacity: 1; transform: translateY(0); transition: opacity .55s ease, transform .55s ease; }
+.audience-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -18px rgba(16,24,32,0.3); }
+.audience-icon {
+  width: 52px; height: 52px; border-radius: 12px; background: var(--paper-soft);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+}
+.audience-icon svg { width: 26px; height: 26px; color: var(--pitch); }
+.audience-card h3 { font-size: 1.08rem; font-weight: 700; color: var(--pitch-dark); margin-bottom: 8px; }
+.audience-card p { font-size: 0.93rem; color: var(--ink-soft); }
+
+@media (max-width: 1000px) { .audience-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .audience-grid { grid-template-columns: 1fr; } }
+
+/* ============ SERVIÇOS ============ */
+.services-band { background: var(--paper-soft); }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(22,52,42,0.1); border-radius: var(--radius); overflow: hidden; }
+.service-item { background: var(--white); padding: 30px 26px; display: flex; gap: 16px; align-items: flex-start; }
+.service-item .check { width: 30px; height: 30px; border-radius: 50%; background: var(--pitch); color: var(--white); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.service-item .check svg { width: 16px; height: 16px; }
+.service-item h4 { font-size: 1rem; font-weight: 700; color: var(--pitch-dark); margin-bottom: 4px; }
+.service-item p { font-size: 0.88rem; color: var(--ink-soft); }
+
+@media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; } }
+
+/* ============ SEGURANÇA (dark trust band) ============ */
+.trust-band { background: var(--navy); color: var(--paper); position: relative; }
+.trust-band .section-head h2 { color: var(--white); }
+.trust-band .section-head p { color: rgba(246,244,238,0.68); }
+.trust-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.trust-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius); padding: 28px;
+  opacity: 0; transform: translateY(18px);
+}
+.trust-card.in-view { opacity: 1; transform: translateY(0); transition: opacity .55s ease, transform .55s ease; }
+.trust-card h4 { font-size: 1.05rem; font-weight: 700; color: var(--amber-soft); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+.trust-card h4 svg { width: 20px; height: 20px; flex-shrink: 0; }
+.trust-card p { font-size: 0.93rem; color: rgba(246,244,238,0.78); }
+.trust-card .field { color: rgba(246,244,238,0.5); font-style: italic; }
+.trust-emergency { grid-column: 1 / -1; background: rgba(200,155,60,0.1); border: 1px solid rgba(200,155,60,0.3); }
+.trust-emergency h4 { color: var(--amber-soft); }
+
+@media (max-width: 800px) { .trust-grid { grid-template-columns: 1fr; } }
+
+/* ============ ATLETAS (energetic) ============ */
+.athletes-section {
+  background: var(--pitch);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.athletes-inner { position: relative; z-index: 2; text-align: center; max-width: 760px; margin: 0 auto; }
+.athletes-section h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 900; }
+.athletes-section .lead { margin-top: 18px; font-size: 1.08rem; color: rgba(246,244,238,0.8); }
+.pillars { margin-top: 46px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.pillar {
+  padding: 10px 22px; border-radius: 999px; background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18); font-weight: 700; font-size: 0.92rem;
+}
+.pitch-lines { position: absolute; inset: 0; opacity: 0.08; background:
+  repeating-linear-gradient(90deg, transparent, transparent 78px, #fff 78px, #fff 79px);
+  z-index: 1;
+}
+
+/* ============ COMO FUNCIONA ============ */
+.timeline { position: relative; max-width: 780px; margin: 0 auto; }
+.timeline::before { content: ""; position: absolute; left: 27px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(180deg, var(--pitch), var(--sage)); }
+.step { display: flex; gap: 26px; padding-bottom: 44px; opacity: 0; transform: translateX(-16px); }
+.step.in-view { opacity: 1; transform: translateX(0); transition: opacity .5s ease, transform .5s ease; }
+.step:last-child { padding-bottom: 0; }
+.step-num {
+  width: 56px; height: 56px; border-radius: 50%; background: var(--white); border: 2px solid var(--pitch);
+  display: flex; align-items: center; justify-content: center; font-family: 'Archivo', sans-serif; font-weight: 800;
+  color: var(--pitch); flex-shrink: 0; z-index: 2; font-size: 1.1rem;
+}
+.step-body h4 { font-size: 1.1rem; font-weight: 700; color: var(--pitch-dark); margin-bottom: 6px; padding-top: 12px; }
+.step-body p { font-size: 0.94rem; color: var(--ink-soft); max-width: 52ch; }
+
+/* ============ DEPOIMENTOS ============ */
+.testi-note { font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 30px; display: flex; align-items: center; gap: 8px; }
+.testi-note .badge { background: var(--paper-soft); border: 1px dashed var(--sage); padding: 3px 10px; border-radius: 6px; font-weight: 600; color: var(--ink-soft); font-size: 0.78rem; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.testi-card {
+  background: var(--white); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow);
+  border: 1px solid rgba(22,52,42,0.06); position: relative;
+}
+.testi-card .quote-mark { font-family: 'Archivo', sans-serif; font-size: 2.6rem; color: var(--amber-soft); line-height: 1; }
+.testi-card p.quote { font-size: 0.96rem; color: var(--ink); margin-top: 6px; font-style: italic; }
+.testi-card .who { margin-top: 18px; font-size: 0.85rem; font-weight: 700; color: var(--pitch-dark); }
+.testi-card .demo-tag { position: absolute; top: 18px; right: 18px; font-size: 0.68rem; font-weight: 700; color: var(--sage); background: var(--paper-soft); padding: 3px 8px; border-radius: 6px; }
+
+@media (max-width: 900px) { .testi-grid { grid-template-columns: 1fr; } }
+
+/* ============ FAQ ============ */
+.faq-list { max-width: 780px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid rgba(22,52,42,0.14); }
+.faq-q {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 22px 4px; text-align: left; font-family: 'Archivo', sans-serif; font-weight: 700;
+  font-size: 1.02rem; color: var(--pitch-dark);
+}
+.faq-q .plus { width: 22px; height: 22px; flex-shrink: 0; position: relative; }
+.faq-q .plus::before, .faq-q .plus::after { content: ""; position: absolute; background: var(--pitch); border-radius: 2px; transition: transform .3s ease; }
+.faq-q .plus::before { width: 100%; height: 2.5px; top: 50%; left: 0; transform: translateY(-50%); }
+.faq-q .plus::after { height: 100%; width: 2.5px; left: 50%; top: 0; transform: translateX(-50%); }
+.faq-item.open .plus::after { transform: translateX(-50%) rotate(90deg); opacity: 0; }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+.faq-a p { padding: 0 4px 22px; font-size: 0.95rem; color: var(--ink-soft); max-width: 66ch; }
+
+/* ============ CTA FINAL ============ */
+.final-cta { background: linear-gradient(135deg, var(--pitch-dark), var(--pitch)); color: var(--white); text-align: center; }
+.final-cta h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 900; }
+.final-cta p { margin-top: 16px; font-size: 1.05rem; color: rgba(246,244,238,0.78); max-width: 52ch; margin-left: auto; margin-right: auto; }
+.final-actions { margin-top: 34px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* ============ FOOTER ============ */
+footer { background: var(--navy); color: rgba(246,244,238,0.75); padding: 64px 0 28px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 36px; }
+.footer-brand { font-family: 'Archivo', sans-serif; font-weight: 800; color: var(--white); font-size: 1.15rem; margin-bottom: 12px; }
+.footer-grid p { font-size: 0.88rem; line-height: 1.7; }
+.footer-col h5 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--amber-soft); margin-bottom: 14px; font-weight: 700; }
+.footer-col a, .footer-col span { display: block; font-size: 0.88rem; margin-bottom: 10px; color: rgba(246,244,238,0.72); }
+.footer-col a:hover { color: var(--white); }
+.footer-bottom { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.8rem; color: rgba(246,244,238,0.5); }
+
+@media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+/* Reveal utility (used once per section entrance, sparingly) */
+.reveal { opacity: 0; transform: translateY(20px); }
+.reveal.in-view { opacity: 1; transform: translateY(0); transition: opacity .6s ease, transform .6s ease; }
+
+/* Accessible focus */
+a:focus-visible, button:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="site-nav" id="siteNav">
+  <div class="wrap nav-inner">
+    <a href="#inicio" class="brand"><span class="dot"></span>Casa Mãe dos Talentos</a>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="#para-quem">Para quem é</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#seguranca">Segurança</a>
+      <a href="#atletas">Atletas</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#faq">Dúvidas</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contato" class="btn btn-primary btn-outline-hide" style="padding:12px 24px; font-size:0.9rem;">Entrar em contato</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#para-quem">Para quem é</a>
+  <a href="#servicos">Serviços</a>
+  <a href="#seguranca">Segurança</a>
+  <a href="#atletas">Atletas</a>
+  <a href="#como-funciona">Como funciona</a>
+  <a href="#depoimentos">Depoimentos</a>
+  <a href="#faq">Dúvidas</a>
+  <a href="#contato" class="btn btn-primary">Falar pelo WhatsApp</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio">
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <h1>Seu talento precisa de organização, disciplina e acompanhamento para evoluir.</h1>
+      <p class="lead">Oferecemos acompanhamento próximo para adolescentes envolvidos com o futebol, apoiando a rotina esportiva do dia a dia e mantendo pais e responsáveis sempre informados.</p>
+      <div class="hero-actions">
+        <a href="#seguranca" class="btn btn-primary">Conheça nosso acompanhamento</a>
+        <a href="#" class="btn btn-whatsapp js-whatsapp" aria-label="Falar pelo WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.4.2-.6.1-.3-.1-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.4 7.6 9.1 7c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5.1 4.4.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.6 1.4 5.1L2 22l5.1-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.2-.4-4.5-1.2l-.3-.2-3.3.9.9-3.2-.2-.3C3.8 14.8 3.2 13.4 3.2 12 3.2 7.2 7.2 3.2 12 3.2S20.8 7.2 20.8 12 16.8 20.2 12 20.2z"/></svg>
+          Falar pelo WhatsApp
+        </a>
+      </div>
+      <div class="hero-trust">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>Mediante autorização dos responsáveis</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Rotina acompanhada de perto</div>
+      </div>
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 520 560" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="pitchGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#1B4332"/>
+            <stop offset="100%" stop-color="#0E241C"/>
+          </linearGradient>
+          <linearGradient id="arcGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#C89B3C"/>
+            <stop offset="100%" stop-color="#E4C878"/>
+          </linearGradient>
+        </defs>
+        <circle cx="260" cy="280" r="250" fill="url(#pitchGrad)"/>
+        <g opacity="0.14" stroke="#F6F4EE" stroke-width="2">
+          <line x1="60" y1="280" x2="460" y2="280"/>
+          <circle cx="260" cy="280" r="70" fill="none"/>
+        </g>
+        <!-- trajectory arc -->
+        <path d="M120 420 Q 260 160 420 240" fill="none" stroke="url(#arcGrad)" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"/>
+        <!-- ball -->
+        <circle cx="415" cy="238" r="14" fill="#F6F4EE"/>
+        <path d="M408 232 l14 12 M415 224 v28" stroke="#16342A" stroke-width="1.4" opacity="0.5"/>
+        <!-- player silhouette (simplified, kicking motion) -->
+        <g fill="#F6F4EE">
+          <path d="M235 190c10-8 26-8 34 2 6 8 4 20-4 26l-6 4 4 30-30 4-2-34c-8-6-8-22 4-32z"/>
+          <path d="M215 250l20 10 8 60-14 90-22-4 10-84-18-52z"/>
+          <path d="M263 252l-10 12-6 58 30 78 20-8-24-72 8-56z"/>
+          <path d="M195 400l-14 30 40 6 2-24z"/>
+          <path d="M295 388l24 24-30 22-14-18z"/>
+          <path d="M245 268l-30 6 4 20 30-4z"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARA QUEM É ============ -->
+<section id="para-quem">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Para quem desenvolvemos este acompanhamento</h2>
+      <p>Um suporte pensado para diferentes pessoas envolvidas na rotina esportiva do adolescente.</p>
+    </div>
+    <div class="audience-grid">
+
+      <div class="audience-card reveal">
+        <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20c0-3.3 2.7-5 6-5s6 1.7 6 5M10 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/></svg></div>
+        <h3>Pais e responsáveis</h3>
+        <p>Para famílias que precisam de apoio e tranquilidade na rotina esportiva dos adolescentes.</p>
+      </div>
+
+      <div class="audience-card reveal">
+        <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V6a2 2 0 012-2h8l6 6v9a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M14 4v6h6"/></svg></div>
+        <h3>Cuidadores e profissionais</h3>
+        <p>Para profissionais que acompanham adolescentes e precisam de uma estrutura organizada.</p>
+      </div>
+
+      <div class="audience-card reveal">
+        <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M6 6l12 12M18 6L6 18"/></svg></div>
+        <h3>Jovens jogadores de futebol</h3>
+        <p>Para atletas que querem desenvolver disciplina, responsabilidade e autonomia.</p>
+      </div>
+
+      <div class="audience-card reveal">
+        <div class="audience-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div>
+        <h3>Famílias que buscam apoio</h3>
+        <p>Para famílias que desejam mais segurança, organização e acompanhamento.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVIÇOS ============ -->
+<section id="servicos" class="services-band">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>O que o serviço oferece</h2>
+      <p>Uma estrutura completa para organizar a rotina esportiva do adolescente do início ao fim.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-item">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><h4>Acompanhamento do adolescente</h4><p>Presença próxima durante as atividades da rotina esportiva.</p></div>
+      </div>
+
+      <div class="service-item">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><h4>Organização da rotina esportiva</h4><p>Planejamento dos horários de treinos, jogos e compromissos.</p></div>
+      </div>
+
+      <div class="service-item">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><h4>Apoio em deslocamentos</h4><p>Suporte na logística de ida e volta para treinos e jogos.</p></div>
+      </div>
+
+      <div class="service-item">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><h4>Comunicação com responsáveis</h4><p>Atualizações regulares sobre a rotina do adolescente.</p></div>
+      </div>
+
+      <div class="service-item">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><h4>Acompanhamento de atividades</h4><p>Registro e atenção às atividades esportivas realizadas.</p></div>
+      </div>
+
+      <div class="service-item">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><h4>Desenvolvimento de disciplina</h4><p>Estímulo à constância e ao compromisso com a rotina.</p></div>
+      </div>
+
+      <div class="service-item">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><h4>Desenvolvimento de responsabilidade</h4><p>Apoio para que o adolescente assuma seus compromissos.</p></div>
+      </div>
+
+      <div class="service-item">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><h4>Desenvolvimento de autonomia</h4><p>Incentivo gradual à independência dentro da rotina.</p></div>
+      </div>
+
+      <div class="service-item">
+        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div><h4>Segurança e confiança</h4><p>Procedimentos organizados para tranquilidade da família.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SEGURANÇA E CONFIANÇA ============ -->
+<section id="seguranca" class="trust-band">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Segurança e confiança</h2>
+      <p>Transparência é a base do nosso trabalho. Veja como o acompanhamento é estruturado.</p>
+    </div>
+    <div class="trust-grid">
+
+      <div class="trust-card reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>Quem são os profissionais</h4>
+        <p><span class="field">[Nome do profissional]</span> — <span class="field">[Formação/qualificação]</span>. <span class="field">[Informações adicionais]</span> sobre a equipe responsável pelo acompanhamento.</p>
+      </div>
+
+      <div class="trust-card reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>Experiência</h4>
+        <p><span class="field">[Experiência profissional]</span> da equipe com adolescentes, esporte e acompanhamento de rotina.</p>
+      </div>
+
+      <div class="trust-card reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Como funciona o acompanhamento</h4>
+        <p>O adolescente é acompanhado durante sua rotina esportiva, com atenção à organização de horários, deslocamentos e atividades combinadas com a família.</p>
+      </div>
+
+      <div class="trust-card reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8l9-5 9 5-9 5-9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg>Como os responsáveis recebem informações</h4>
+        <p>Pais e responsáveis recebem atualizações periódicas sobre atividades, treinos, deslocamentos e eventuais ocorrências, conforme combinado com a família.</p>
+      </div>
+
+      <div class="trust-card reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>Autorização dos responsáveis</h4>
+        <p>Todo o acompanhamento ocorre exclusivamente mediante autorização prévia dos pais ou responsáveis legais do adolescente.</p>
+      </div>
+
+      <div class="trust-card reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>Privacidade e proteção de dados</h4>
+        <p>As informações pessoais do adolescente e da família são tratadas com confidencialidade, utilizadas apenas para fins do acompanhamento oferecido.</p>
+      </div>
+
+      <div class="trust-card trust-emergency reveal">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L2.5 17a2 2 0 001.7 3h15.6a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>Procedimentos de emergência</h4>
+        <p>Existem procedimentos definidos para situações de emergência. Nesses casos, os responsáveis são comunicados imediatamente, conforme os protocolos estabelecidos com a família.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ ATLETAS ============ -->
+<section id="atletas" class="athletes-section">
+  <div class="pitch-lines"></div>
+  <div class="wrap athletes-inner">
+    <h2>Seu talento precisa de organização, disciplina e acompanhamento para evoluir.</h2>
+    <p class="lead">Evoluir no futebol não depende só de técnica. Depende de rotina, compromisso e das escolhas que você faz fora do campo. Aqui, você tem acompanhamento para construir isso com consistência.</p>
+    <div class="pillars">
+      <span class="pillar">Disciplina</span>
+      <span class="pillar">Responsabilidade</span>
+      <span class="pillar">Compromisso</span>
+      <span class="pillar">Organização</span>
+      <span class="pillar">Evolução</span>
+      <span class="pillar">Autonomia</span>
+      <span class="pillar">Foco nos objetivos</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMO FUNCIONA ============ -->
+<section id="como-funciona">
+  <div class="wrap">
+    <div class="section-head center" style="margin-left:auto;margin-right:auto;">
+      <h2>Como funciona</h2>
+      <p>Um processo claro, do primeiro contato ao acompanhamento contínuo da rotina.</p>
+    </div>
+    <div class="timeline">
+
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-body"><h4>Cadastro</h4><p>A família realiza o cadastro inicial, fornecendo as informações necessárias sobre o adolescente e a rotina esportiva.</p></div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-body"><h4>Conversa com a família</h4><p>Uma conversa é realizada com os responsáveis para entender necessidades, rotina e expectativas.</p></div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-body"><h4>Planejamento</h4><p>É definido, junto à família, como o acompanhamento será organizado ao longo da rotina do adolescente.</p></div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-body"><h4>Acompanhamento</h4><p>O adolescente passa a contar com suporte próximo na sua rotina esportiva, conforme planejado.</p></div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step-num">05</div>
+        <div class="step-body"><h4>Feedback aos responsáveis</h4><p>Os pais recebem retornos periódicos sobre a evolução e as atividades da rotina.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPOIMENTOS ============ -->
+<section id="depoimentos" class="services-band">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Depoimentos</h2>
+      <p>Depoimentos publicados mediante autorização.</p>
+    </div>
+    <div class="testi-note"><span class="badge">Conteúdo demonstrativo</span> Os exemplos abaixo ilustram o formato dos depoimentos e devem ser substituídos por relatos reais e autorizados.</div>
+    <div class="testi-grid">
+
+      <div class="testi-card">
+        <span class="demo-tag">Exemplo editável</span>
+        <div class="quote-mark">"</div>
+        <p class="quote">Desde que começamos o acompanhamento, nossa rotina ficou muito mais organizada e tranquila.</p>
+        <div class="who">— [Nome do responsável]</div>
+      </div>
+
+      <div class="testi-card">
+        <span class="demo-tag">Exemplo editável</span>
+        <div class="quote-mark">"</div>
+        <p class="quote">Ter alguém acompanhando minha rotina esportiva me ajudou a ter mais responsabilidade e disciplina.</p>
+        <div class="who">— [Nome do atleta]</div>
+      </div>
+
+      <div class="testi-card">
+        <span class="demo-tag">Exemplo editável</span>
+        <div class="quote-mark">"</div>
+        <p class="quote">A comunicação constante nos deu muito mais segurança para confiar no dia a dia do nosso filho.</p>
+        <div class="who">— [Nome do responsável]</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Perguntas frequentes</h2>
+      <p>Reunimos as dúvidas mais comuns de famílias e atletas sobre o acompanhamento.</p>
+    </div>
+    <div class="faq-list" id="faqList">
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Para qual faixa etária é o acompanhamento?<span class="plus"></span></button>
+        <div class="faq-a"><p>O acompanhamento é voltado para adolescentes. <span class="field" style="font-style:italic;color:var(--ink-soft);">[Faixa etária específica a ser definida pelo serviço]</span>.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Como funciona o deslocamento para treinos e jogos?<span class="plus"></span></button>
+        <div class="faq-a"><p>O apoio em deslocamentos é combinado previamente com a família, de acordo com a rotina de treinos e jogos do adolescente.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Os pais recebem informações durante o acompanhamento?<span class="plus"></span></button>
+        <div class="faq-a"><p>Sim. Os responsáveis recebem atualizações periódicas sobre a rotina, atividades e eventuais ocorrências.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Como funciona a comunicação com os responsáveis?<span class="plus"></span></button>
+        <div class="faq-a"><p>A comunicação é feita de forma direta e contínua, com canais definidos junto à família no momento do cadastro.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Existe autorização dos responsáveis?<span class="plus"></span></button>
+        <div class="faq-a"><p>Sim. Todo o acompanhamento ocorre exclusivamente mediante autorização prévia dos pais ou responsáveis legais.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">O que acontece em uma situação de emergência?<span class="plus"></span></button>
+        <div class="faq-a"><p>Existem procedimentos definidos para emergências, e os responsáveis são comunicados imediatamente conforme os protocolos estabelecidos.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Como funciona o cadastro?<span class="plus"></span></button>
+        <div class="faq-a"><p>O cadastro é feito com as informações da família e do adolescente, seguido de uma conversa para entender a rotina e as necessidades.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Como posso entrar em contato?<span class="plus"></span></button>
+        <div class="faq-a"><p>Você pode falar diretamente pelo WhatsApp ou pelos demais canais disponíveis no rodapé deste site.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section id="contato" class="final-cta">
+  <div class="wrap">
+    <h2>Quer conhecer nosso acompanhamento?</h2>
+    <p>Entre em contato e converse com nossa equipe para entender como podemos ajudar na rotina esportiva do seu atleta.</p>
+    <div class="final-actions">
+      <a href="#" class="btn btn-whatsapp js-whatsapp" aria-label="Falar pelo WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.4.2-.6.1-.3-.1-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.4 7.6 9.1 7c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5.1 4.4.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.6 1.4 5.1L2 22l5.1-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.2-.4-4.5-1.2l-.3-.2-3.3.9.9-3.2-.2-.3C3.8 14.8 3.2 13.4 3.2 12 3.2 7.2 7.2 3.2 12 3.2S20.8 7.2 20.8 12 16.8 20.2 12 20.2z"/></svg>
+        Falar pelo WhatsApp
+      </a>
+      <a href="mailto:Kanindesouza413@gmail.com" class="btn btn-ghost-light">Entrar em contato</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Casa Mãe dos Talentos</div>
+        <p>Acompanhamento e suporte para adolescentes envolvidos com futebol e rotina esportiva, com organização, disciplina e proximidade com as famílias.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Contato</h5>
+        <a href="#" class="js-whatsapp">WhatsApp: (11) 96719-7484</a>
+        <a href="mailto:Kanindesouza413@gmail.com">Kanindesouza413@gmail.com</a>
+        <a href="https://instagram.com/[perfil]" target="_blank" rel="noopener">Instagram: @[perfil]</a>
+      </div>
+      <div class="footer-col">
+        <h5>Institucional</h5>
+        <a href="#seguranca">Segurança e confiança</a>
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Proteção de Dados</a>
+      </div>
+      <div class="footer-col">
+        <h5>Navegação</h5>
+        <a href="#para-quem">Para quem é</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#faq">Dúvidas frequentes</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Casa Mãe dos Talentos. Todos os direitos reservados.</span>
+      <span>Site institucional — conteúdo demonstrativo a ser personalizado.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================
+   CONFIGURAÇÃO — edite apenas esta linha para definir o WhatsApp
+   Formato: código do país + DDD + número, sem espaços ou símbolos
+   Exemplo: "5511999998888"
+   ========================================================== */
+const WHATSAPP_NUMBER = "5511967197484";
+const WHATSAPP_MESSAGE = "Olá! Gostaria de saber mais sobre o acompanhamento.";
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ---- WhatsApp links ----
+  const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+  document.querySelectorAll('.js-whatsapp').forEach(el => el.setAttribute('href', waLink));
+
+  // ---- Footer year ----
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---- Nav background on scroll ----
+  const nav = document.getElementById('siteNav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ---- Mobile menu ----
+  const hamburger = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }));
+
+  // ---- Reveal on scroll (Intersection Observer) ----
+  const revealEls = document.querySelectorAll('.reveal, .audience-card, .trust-card, .step');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+
+  // ---- FAQ accordion ----
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-q');
+    const answer = item.querySelector('.faq-a');
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      // close all others
+      document.querySelectorAll('.faq-item.open').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('open');
+          other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+          other.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+      item.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      answer.style.maxHeight = !isOpen ? answer.scrollHeight + 'px' : null;
+    });
+  });
+
+});
+</script>
+
+</body>
+</html>
